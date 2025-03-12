@@ -41,6 +41,15 @@ public class Lexer {
                 } else if (input.charAt(pos) == 'f') {
                     tokens.add(new Token(Token.Type.F, "f"));
                     pos++;
+                } else if (input.charAt(pos) == 'g') {
+                    tokens.add(new Token(Token.Type.G, "g"));
+                    pos++;
+                } else if (input.charAt(pos) == 'h') {
+                    tokens.add(new Token(Token.Type.H, "h"));
+                    pos++;
+                } else if (input.charAt(pos) == 'd') {
+                    tokens.add(new Token(Token.Type.DX, "dx"));
+                    pos = pos + 2;
                 } else if (input.charAt(pos) == 's') {
                     tokens.add(new Token(Token.Type.SIN, "sin"));
                     pos = pos + 3;

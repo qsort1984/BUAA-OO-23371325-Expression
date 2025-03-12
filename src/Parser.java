@@ -79,9 +79,31 @@ public class Parser {
             return parseCosFactor();
         } else if (token.getType() == Token.Type.F) {
             return parseFuncFactor();
+        } else if (token.getType() == Token.Type.G) {
+            return parseGhFactor(true);
+        } else if (token.getType() == Token.Type.H) {
+            return parseGhFactor(false);
+        } else if (token.getType() == Token.Type.DX) {
+            return parseDeriveFactor();
         } else {
             return parseExprFactor();
         }
+    }
+
+    public DeriveFactor parseDeriveFactor() {
+        lexer.addIndex(2); //* skip dx(
+
+        Expression expr = parseExpr();
+        DeriveFactor deriveFactor = new DeriveFactor(expr);
+        lexer.nextToken(); //* skip )
+
+        return deriveFactor;
+    }
+
+    public GhFactor parseGhFactor(boolean sign) {
+        //* TODO
+        //* true -> g() false -> h()
+        return null;
     }
 
     public ExprFactor parseExprFactor() {
