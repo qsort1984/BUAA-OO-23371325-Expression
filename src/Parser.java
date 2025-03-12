@@ -80,9 +80,9 @@ public class Parser {
         } else if (token.getType() == Token.Type.F) {
             return parseFuncFactor();
         } else if (token.getType() == Token.Type.G) {
-            return parseGhFactor(true);
+            return parseGhFactor(0);
         } else if (token.getType() == Token.Type.H) {
-            return parseGhFactor(false);
+            return parseGhFactor(1);
         } else if (token.getType() == Token.Type.DX) {
             return parseDeriveFactor();
         } else {
@@ -100,10 +100,23 @@ public class Parser {
         return deriveFactor;
     }
 
-    public GhFactor parseGhFactor(boolean sign) {
-        //* TODO
-        //* true -> g() false -> h()
-        return null;
+    public GhFactor parseGhFactor(int sign) {
+        //* 0-> g() 1 -> h()
+        final GhFactor ghFactor;
+        lexer.addIndex(2); //* 跳过g(或h(
+        Factor factor1 = parseFactor();
+
+        if (lexer.getCurToken().getType() == Token.Type.COMMA) {
+            lexer.nextToken();
+            Factor factor2 = parseFactor();
+            ghFactor = new GhFactor(sign, factor1, factor2);
+        } else {
+            ghFactor = new GhFactor(sign, factor1);
+        }
+
+        lexer.nextToken();
+
+        return ghFactor;
     }
 
     public ExprFactor parseExprFactor() {

@@ -8,8 +8,6 @@ public class FuncDef {
     private static int end;
     private static String def;
 
-    //* 改写为静态方法和变量？
-
     public static void setFuncDef(String input) {
         //* f{0}(x[,y])=……
         def = input.replaceAll("[ \t]", "");
@@ -26,7 +24,7 @@ public class FuncDef {
             if (def.charAt(pos) == ',') {
                 pos++;
                 vars.add(def.charAt(pos));
-                pos++; //* 跳过右括号
+                pos++; //* 跳到右括号
             }
             pos = pos + 2; //* 跳过等号
 

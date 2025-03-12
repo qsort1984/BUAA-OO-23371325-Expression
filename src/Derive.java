@@ -21,7 +21,7 @@ public class Derive {
         HashMap<Polynomial,BigInteger> cos = mono.getCos();
 
         Monomial dxMono = new Monomial(
-            coefficient.multiply(exponent.max(BigInteger.ONE)),
+            coefficient.multiply(exponent),
             exponent.subtract(BigInteger.ONE).max(BigInteger.ZERO),
             sin, cos);
         HashSet<Monomial> dxMonoSet = new HashSet<>();
