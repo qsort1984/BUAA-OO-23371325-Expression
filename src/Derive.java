@@ -91,12 +91,12 @@ public class Derive {
 
         HashMap<Polynomial,BigInteger> newSin;
         HashMap<Polynomial,BigInteger> newCos;
-        for (Polynomial poly : sin.keySet()) {
+        for (Polynomial poly : cos.keySet()) {
             newSin = new HashMap<>(sin);
             newCos = new HashMap<>(cos);
 
             //* 处理当前的cos(poly)^t
-            final BigInteger t = sin.get(poly);
+            final BigInteger t = cos.get(poly);
             if (t.equals(BigInteger.ZERO)) {
                 dxPoly = new Polynomial();
             } else {
