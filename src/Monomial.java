@@ -215,7 +215,9 @@ public final class Monomial {
             return true;
         } else {
             for (Polynomial p : sin.keySet()) {
-                return p.isZero() && sin.get(p).signum() != 0;
+                if (p.isZero() && sin.get(p).signum() != 0) {
+                    return true;
+                }
             }
         }
 
