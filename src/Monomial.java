@@ -112,7 +112,7 @@ public final class Monomial {
                     && num.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) < 0) {
                     if (coefficient.getLowestSetBit() >= num.intValue()) {
                         sinIterator.remove();
-                        newSin.put(q.mul(num.intValue()), BigInteger.ONE);
+                        newSin.merge(p.mul(1), num, BigInteger::add);
                         return num;
                     }
                 }
