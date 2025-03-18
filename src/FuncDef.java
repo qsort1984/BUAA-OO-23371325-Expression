@@ -60,18 +60,18 @@ public class FuncDef {
         pos = def.indexOf('(') + 1;
         def = def.substring(pos);
         if (sign == 1) {
-            end = def.indexOf(',');
+            end = findSymbol(def,',');
             ArrayList<String> strings = new ArrayList<>();
             strings.add(def.substring(0, end));
 
             pos = end + 1;
             def = def.substring(pos);
-            end = findRparen(def);
+            end = findSymbol(def,')');
             strings.add(def.substring(0, end));
 
             nfunc.addFactor(strings);
         } else {
-            end = findRparen(def);
+            end = findSymbol(def,')');
             ArrayList<String> strings = new ArrayList<>();
             strings.add(def.substring(0, end));
 
@@ -79,7 +79,7 @@ public class FuncDef {
         }
     }
 
-    public static int findRparen(String s) {
+    public static int findSymbol(String s, char symbol) {
         int tem = 0;
 
         for (int i = 0; i < s.length(); i++) {
@@ -88,10 +88,12 @@ public class FuncDef {
             if (ch == '(') {
                 tem++;
             } else if (ch == ')') {
-                if (tem == 0) {
+                if (tem == 0 && ch == symbol) {
                     return i;
                 }
                 tem--;
+            } else if (ch == symbol && tem == 0) {
+                return i;
             }
         }
 
